@@ -11,10 +11,6 @@ PrimeLock AI is a polyglot microservice application that combines developer work
 * **Data Layer:** PostgreSQL 16 (utilizing HNSW indexing via the `pgvector` extension) and Redis 7 Alpine.
 * **Infrastructure:** Fully containerized isolated local development environment via Docker Compose.
 
-primelock-ai/
-├── core-engine/       # Spring Boot REST API & Domain Models
-├── ai-worker/         # (WIP) Python FastAPI AI Microservice
-└── docker-compose.yml # Shared Infrastructure Configuration
 
 ## 🚀 Getting Started (Local Development)
 
