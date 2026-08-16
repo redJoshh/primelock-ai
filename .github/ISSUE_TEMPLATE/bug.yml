@@ -1,49 +1,42 @@
-name: Bug
-description: Encountered problems
-title: "[BUG] "
-labels: ["type: bug"]
+name: Bug Report
+description: Report an error or unexpected behavior in the system.
+labels: ["bug"]
 body:
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: What needs to be fixed and why
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
     validations:
       required: true
   - type: textarea
-    id: steps-to-reproduce-and-solution
+    id: reproduction
     attributes:
-      label: steps-to-reproduce-and-solution
-      description: Checklist of what "done" looks like
-      placeholder: |
-        - [ ] Step 1
-        - [ ] Step 2
+      label: Steps to Reproduce
+      description: Exact steps to trigger the issue.
+      value: |
+        1. Go to '...'
+        2. Send a POST request to '...' with payload '...'
+        3. See error
     validations:
       required: true
-  - type: dropdown
-    id: component
+  - type: textarea
+    id: expected-behavior
     attributes:
-      label: Component
-      options:
-        - Mobile-Frontend
-        - Mobile-Backend
-        - Web-Backend
-        - Web-Frontend
-        - Integration/FCM
-        - Docs
+      label: Expected Behavior
+      description: What did you expect to happen?
     validations:
       required: true
-
-  - type: dropdown
-    id: sprint
+  - type: textarea
+    id: logs
     attributes:
-      label: Sprint
-      description: Which sprint is this targeted for
-      options:
-        - Sprint 1
-        - Sprint 2
-        - Sprint 3
-        - Sprint 4
-        - Backlog / Unscheduled
+      label: Stacktrace / Logs
+      description: Paste any relevant terminal errors or Spring Boot stacktraces here.
+      render: java
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: e.g., Docker Desktop v4.28, Windows 11 WSL2, Java 21
     validations:
-      required: false
+      required: true
