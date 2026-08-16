@@ -1,34 +1,30 @@
-name: Feature
-description: New feature or user story
-title: "[FEATURE] "
-labels: ["type: feature"]
+name: Feature Request
+description: Propose a new capability or architectural enhancement for PrimeLock AI.
+labels: ["enhancement"]
 body:
   - type: textarea
-    id: description
+    id: problem
     attributes:
-      label: Description
-      description: What needs to be built and why
+      label: The Problem / Business Value
+      description: What is the context? Why do we need this feature?
+      placeholder: "When a user does X, they currently cannot do Y..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this feature work from a technical perspective?
+      placeholder: "We should create a new REST endpoint that..."
     validations:
       required: true
   - type: textarea
     id: acceptance-criteria
     attributes:
       label: Acceptance Criteria
-      description: Checklist of what "done" looks like
-      placeholder: |
+      description: What conditions must be met for this feature to be considered "Done"?
+      value: |
         - [ ] Criterion 1
         - [ ] Criterion 2
     validations:
       required: true
-  - type: dropdown
-    id: component
-    attributes:
-      label: Component
-      options:
-        - Web-Backend
-        - Web-Frontend
-        - Integration
-        - Docs
-    validations:
-      required: true
-
