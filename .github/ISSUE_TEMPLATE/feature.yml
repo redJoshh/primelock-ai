@@ -25,36 +25,10 @@ body:
     attributes:
       label: Component
       options:
-        - Mobile-Frontend
-        - Mobile-Backend
         - Web-Backend
         - Web-Frontend
-        - Integration/FCM
+        - Integration
         - Docs
     validations:
       required: true
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      options:
-        - Must-have
-        - Should-have
-        - Could-have
-    validations:
-      required: true
-  - type: dropdown
-    id: sprint
-    attributes:
-      label: Sprint
-      description: Which sprint is this targeted for
-      options:
-        - Sprint 1
-        - Sprint 2
-        - Sprint 3
-        - Sprint 4
-        - Sprint 5
-        - Sprint 6
-        - Backlog / Unscheduled
-    validations:
-      required: false
+
