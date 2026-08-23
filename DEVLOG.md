@@ -45,27 +45,26 @@ Weekly progress notes, updated most Sundays. Kept short on purpose — this is a
 ## Week 3 — August 23, 2026
 
 **Shipped:**
--Created missing JPA Repositories and Domain models (RuleOfThreeGoal, BptSession).
--Refactored the User entity to implement Spring Security's UserDetails and strictly mapped fields to the database schema (e.g., password_hash, BPT times).
--Wired up ApplicationConfig to inject the BCrypt password encoder and UserDetailsService.
--Configured the SecurityFilterChain (SecurityConfig) to enforce stateless JWT authentication while leaving /api/v1/auth/** open.
--Implemented Auth DTOs, AuthenticationService (password hashing, DB saving, JWT generation), and AuthenticationController.
--Successfully tested end-to-end registration via Postman and generated a valid, cryptographically signed JWT.
+- Created missing JPA Repositories and Domain models (RuleOfThreeGoal, BptSession).
+- Refactored the User entity to implement Spring Security's UserDetails and strictly mapped fields to the database schema (e.g., password_hash, BPT times).
+- Wired up ApplicationConfig to inject the BCrypt password encoder and UserDetailsService.
+- Configured the SecurityFilterChain (SecurityConfig) to enforce stateless JWT authentication while leaving /api/v1/auth/** open.
+- Implemented Auth DTOs, AuthenticationService (password hashing, DB saving, JWT generation), and AuthenticationController.
+- Successfully tested end-to-end registration via Postman and generated a valid, cryptographically signed JWT.
 
 **Blocked / struggled:**
--IntelliJ indexing cache became corrupted, causing hallucinated compiler errors (resolved via IDE Cache Invalidation).
--Spring Security 6+ deprecations: DaoAuthenticationProvider strictness no longer allows empty constructors, requiring a refactor to constructor parameter injection.
--App boot crashed due to Hibernate schema validation; the bpt_sessions table in PostgreSQL was missing the created_at column inherited from BaseEntity. Resolved via manual SQL ALTER TABLE and for future encounters,
-resolved by altering application properties spring jpa ddl-auto to update.
+- IntelliJ indexing cache became corrupted, causing hallucinated compiler errors (resolved via IDE Cache Invalidation).
+- Spring Security 6+ deprecations: DaoAuthenticationProvider strictness no longer allows empty constructors, requiring a refactor to constructor parameter injection.
+- App boot crashed due to Hibernate schema validation; the bpt_sessions table in PostgreSQL was missing the created_at column inherited from BaseEntity. Resolved via manual SQL ALTER TABLE and for future encounters, resolved by altering application properties spring jpa ddl-auto to update.
 
 **Next Sunday:**
--Implement a secured test endpoint to verify the JWT filter intercepts and validates tokens correctly.
--Build the BptSession Service layer to handle the core business logic of creating and reading energy/focus tracking sessions.
--Expose the REST API controller for the BPT feature
+- Implement a secured test endpoint to verify the JWT filter intercepts and validates tokens correctly.
+- Build the BptSession Service layer to handle the core business logic of creating and reading energy/focus tracking sessions.
+- Expose the REST API controller for the BPT feature
 
 **Notes:**
 - Breaking down the repository creation into distinct, granular tickets kept the Kanban board metrics clean and accurate.
-- -The strict Hibernate schema validation check was a great safety net—catching the missing DB column before it could cause silent data corruption in production. The authentication engine is now officially locked, loaded, and completely stateless.
+- The strict Hibernate schema validation check was a great safety net—catching the missing DB column before it could cause silent data corruption in production. The authentication engine is now officially locked, loaded, and completely stateless.
 
 ---
 
