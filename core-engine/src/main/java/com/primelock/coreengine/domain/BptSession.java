@@ -26,6 +26,12 @@ public class BptSession extends BaseEntity {
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
+    @Column(name = "start_time")
+    private OffsetDateTime startTime;
+
+    @Column(name = "end_time")
+    private OffsetDateTime endTime;
+
     @Column(name = "recorded_at", nullable = false)
     private OffsetDateTime recordedAt;
 
