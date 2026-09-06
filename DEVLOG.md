@@ -68,6 +68,32 @@ Weekly progress notes, updated most Sundays. Kept short on purpose — this is a
 
 ---
 
+## Week 4 - September 06, 2026
+
+**Shipped:**
+- Implemented DemoController as a secured test endpoint to successfully verify that the JWT filter intercepts, validates, and admits/rejects requests properly.
+- Built the BptSession Data Transfer Objects (BptSessionRequest, BptSessionResponse) to strictly control the data flowing in and out of the API.
+- Developed the BptSessionService layer to map DTOs to the BptSession database entity and handle database saves/retrievals using java.util.UUID.
+- Exposed the BptSessionController REST API, utilizing Spring Security’s Principal object to securely extract the user's identity from the JWT wristband rather than trusting the frontend.
+- Implemented Auth DTOs, AuthenticationService (password hashing, DB saving, JWT generation), and AuthenticationController.
+- Upgraded the Biological Prime Time tracking granularity by removing the rigid 1-5 database constraints in PostgreSQL and shifting the domain model to a 1-10 scale.
+
+**Blocked / struggled:**
+- Server threw a 500 SignatureException when hitting the test endpoint. Root cause: The JWT secret key regenerates on server boot, making last week's token invalid. Resolved by re-authenticating.
+- Hit a NoResourceFoundException on the new DemoController. Root cause: A microscopic typo in the mapping annotation (/ap1/v1/demo instead of /api/v1/demo).
+- Domain model mapping mismatch: The Service layer tried to use setUser() but the entity was mapped using a primitive foreign key (userId). Resolved by switching to setUserId() and adding missing startTime and endTime fields to the BptSession Java entity.
+- Encountered a 409 Data Integrity Conflict when saving a BPT session. PostgreSQL's hardcoded check constraints (bpt_sessions_energy_rating_check) rejected ratings higher than 5. A SQL script fix failed due to DBeaver transaction rollbacks, so it was resolved by visually deleting the constraints directly in the DBeaver UI.
+
+**Next Sunday:**
+- Add logs/ and *.log to .gitignore to prevent server logs from polluting the repository.
+- Implement BPT Session Date Filtering (Issue #13) so the frontend can query specific date ranges for graphs.
+- Build the Rule of Three Service Layer (Issue #14) for daily priority tracking.
+- Expose the Rule of Three REST API (Issue #15) to allow creating and toggling daily goals.
+
+**Notes:**
+- Relying on the Principal object for user identification is a massive security win—it completely prevents users from spoofing IDs in the JSON body.
+- The 409 Conflict error was a great example of the database doing exactly what it was supposed to do. Hardcoded SQL constraints are a fantastic last line of defense against invalid data, even if it takes a minute to figure out why they tripped!
+- DBeaver's visual constraint editor is a lifesaver when raw SQL scripts get tangled up in partial rollbacks.
 <!--
 Copy the block above for each new week. Keep entries to ~4 short bullets max —
 if an entry is taking more than 5 minutes to write, it's too long.
